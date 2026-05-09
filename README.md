@@ -64,7 +64,8 @@ This lab is hosted on **VMware Workstation** and spans multiple categories of vi
 
 | # | Report Title | Category | Date |
 |---|---|---|---|
-| 001 | *(coming soon)* | — | — |
+| 001 | [Wazuh SSH Lab Report](Wazuh_SSH_Lab_Report_v4.docx) | Detection / Authentication | May 2026 |
+| 002 | [Non-Technical Lab Report](Lab_Reports_Non_Technical_v2.docx) | Documentation | May 2026 |
 
 > Reports will be added as labs are completed. Each report includes objectives, methodology, findings, and screenshots.
 
