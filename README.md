@@ -2,128 +2,205 @@
 
 Hands-on documentation of Wazuh SIEM/XDR deployments, detection engineering, alert analysis, and blue team scenarios — built and tested in a self-hosted home lab environment.
 
+This repository captures a complete, evidence-driven SOC analyst workflow across multiple phases: from initial attack detection through gap analysis, remediation, and strategic SIEM deployment.
+
+---
+
+## 📋 Lab Reports — Complete Progression
+
+### **Phase 1: Initial Detection & Investigation**
+
+| Report | Date | Focus | Key Findings |
+|--------|------|-------|--------------|
+| **Wazuh SSH Lab Report v1.0** | 3 May 2026 | Basic SSH brute force detection | ✅ Attack detected within seconds; Wazuh rules working correctly |
+| **Wazuh SSH Lab Report v2.0** | 3 May 2026 | Alert investigation & gap analysis | ⚠️ Identified 2 critical security gaps (source IP invisibility, East-West blind spot) |
+
+### **Phase 2: Corrective Actions & Insider Threat Escalation**
+
+| Report | Date | Focus | Key Findings |
+|--------|------|-------|--------------|
+| **Wazuh SSH Lab Report v3.0** | 4 May 2026 | Corrective actions & Splunk decision | ✅ OpenSSH log collection configured; Strategic Splunk deployment planned |
+| **Wazuh SSH Lab Report v4.0** | 8 May 2026 | Insider threat simulation (Hydra) | ✅ Kali agent deployed (Agent 005); Sophisticated attack detected; 2 findings closed |
+
+### **Phase 3: Strategic SIEM Deployment & Full Resolution**
+
+| Report | Date | Focus | Key Findings |
+|--------|------|-------|--------------|
+| **Splunk Supplementary SIEM Report (FINAL)** | 9 May 2026 | Splunk deployment & findings closure | ✅ All 4 security findings FULLY CLOSED; Source IP attribution resolved |
+
+---
+
+## 🎯 Non-Technical Summaries
+
+For stakeholders and portfolio use, see:
+
+- **Lab_Reports_Non_Technical.docx** — High-level overview of all three exercises (management-friendly)
+- **Lab_Reports_Non_Technical_v2.docx** — Updated summary including insider threat simulation
+
+---
+
+## 🔍 What This Demonstrates
+
+This lab programme showcases:
+
+✅ **End-to-end SOC analyst workflow** — Detect → Investigate → Find Gaps → Remediate → Verify
+
+✅ **Evidence-driven decision making** — Strategic tooling decisions backed by systematic gap analysis
+
+✅ **MITRE ATT&CK framework** — Automatic technique mapping and attack classification
+
+✅ **Multi-SIEM architecture** — Wazuh + Splunk deployment with clear understanding of each tool's strengths
+
+✅ **Continuous improvement** — Security posture enhanced between each phase
+
+✅ **Professional documentation** — Technical depth with audit trail integrity
+
 ---
 
 ## 🧪 Lab Environment
 
-This lab is hosted on **VMware Workstation Pro 25H2** and spans multiple categories of virtual machines designed to simulate real-world enterprise environments, adversary targets, and security tooling.
+### Infrastructure
 
-### 🔴 Vulnerable / Target Systems
-| VM | Purpose |
-|---|---|
-| Mr Robot VM | CTF-style Linux target |
-| VPLE | Vulnerable Linux practice environment |
-| OWASP Broken Web Apps VM v1.2 | Web application vulnerability testing |
-| Metasploitable2-Linux | Classic multi-vulnerability Linux target |
+| Component | Details | IP Address |
+|-----------|---------|-----------|
+| **SIEM — Wazuh** | Ubuntu Server 24.04 LTS + Wazuh v4.11.2 | 192.168.1.15 |
+| **SIEM — Splunk** | Ubuntu Server 24.04 LTS + Splunk Enterprise 10.2.3 | TBD |
+| **Target Endpoint** | Windows 11 Pro (Wazuh Agent 001) | 192.168.1.8 |
+| **Attack Platform** | Kali Linux 2025.4 (Wazuh Agent 005) | 192.168.1.21 |
+| **Firewall / IDS** | IPFire 2.29 x86_64 (Core Update 191) | 192.168.1.1 |
+| **Hypervisor** | VMware Workstation Pro 25H2 | — |
 
-### 🪟 Legacy Operating Systems
-| VM | Notes |
-|---|---|
-| Windows 10 x64 | Legacy endpoint simulation |
-| Windows 7 | End-of-life OS detection testing |
-| Windows Vista x64 Edition | Legacy endpoint |
-| Windows XP Professional | End-of-life OS |
-| Windows 98 | Historical / legacy |
-
-### 🖥️ Servers
-| VM | Purpose |
-|---|---|
-| Windows Server 2019 | Active Directory / endpoint agent testing |
-| Windows Server 2016 Essentials | Server-based detection scenarios |
-
-### 💻 Standalone Workstations
-| VM | Notes |
-|---|---|
-| Windows 11 x64 | Modern endpoint — primary attack target |
-| Windows 11 Workstation x64 | Workstation-class endpoint |
-
-### 🔥 Firewalls & Network
-| VM | Purpose |
-|---|---|
-| IPFire 2.29 | Perimeter firewall / log source — GREEN & RED zone logging active |
-| PFsense | Network firewall / traffic analysis |
-
-### 🔬 Forensics & Offensive Tooling
-| VM | Purpose |
-|---|---|
-| Kali Linux Purple | Purple team operations |
-| Kali Linux 2025.4 | Offensive security / red team — Wazuh Agent 005 deployed |
-| SIFT Workstation | Digital forensics & incident response |
-
-### 📡 SIEM & Analytics
-| VM | Purpose |
-|---|---|
-| Ubuntu 64-bit (Wazuh) | Wazuh v4.11.2 manager / indexer / dashboard — 192.168.1.15 |
-| Ubuntu 64-bit (SIEM) | Splunk Enterprise 10.2.3 — supplementary SIEM |
-| SOF-ELK | ELK-based log analysis |
-| VMware ESXi 7 | Nested ESXi — Network+ lab testing only |
-
----
-
-## 📁 Report Index
-
-| # | Report Title | Category | Date |
-|---|---|---|---|
-| 001 | [Wazuh SSH Lab Report v4.0](Wazuh_SSH_Lab_Report_v4.docx) | Detection / Authentication / Gap Analysis | 8 May 2026 |
-| 002 | [Non-Technical Lab Report](Lab_Reports_Non_Technical_v2.docx) | Documentation | May 2026 |
-| 003 | [Splunk Supplementary SIEM Report](Splunk_Supplementary_SIEM_Report_FINAL.docx) | Detection / SIEM Comparison / Remediation | 9 May 2026 |
-
-> Reports will be added as labs are completed. Each report includes objectives, methodology, findings, and screenshots.
-
----
-
-## 🔬 Latest Lab — SSH Brute Force Detection (May 2026)
-
-A four-phase exercise covering attack simulation, alert investigation, gap analysis, SIEM deployment, and full remediation.
-
-**Attack:** Hydra SSH brute force from Kali Linux (192.168.1.21) → Windows 11 (192.168.1.8)  
-**MITRE ATT&CK:** T1110.001 — Brute Force: Password Guessing
-
-### 🔍 Security Findings & Outcomes
+### Security Findings — Status
 
 | ID | Severity | Finding | Status |
-|---|---|---|---|
-| F-001 | 🔴 HIGH | Source IP not captured in Wazuh — Windows OpenSSH logs to a separate Operational channel | ✅ CLOSED — Resolved via Splunk ingesting OpenSSH/Operational log |
-| F-002 | 🔴 HIGH | East-West traffic blind spot — Kali attack platform not monitored | ✅ CLOSED — Wazuh Agent 005 deployed on Kali Linux |
-| F-003 | 🟡 MEDIUM | No account lockout policy on Windows 11 — unlimited guessing possible | ✅ CLOSED — Group Policy configured: 5 attempts, 30 min lockout. Windows confirmed account locked out. |
-| F-004 | 🟡 MEDIUM | IPFire log storage gap | ✅ CLOSED — IPFire logging confirmed active: 15,835 hits on 8 May 2026 |
+|----|----------|---------|--------|
+| **F-001** | HIGH | Source IP not captured in Windows SSH logs | ✅ CLOSED — Splunk OpenSSH/Operational parsing |
+| **F-002** | HIGH | East-West traffic blind spot | ✅ CLOSED — Wazuh Agent 005 on Kali |
+| **F-003** | MEDIUM | No account lockout policy | ✅ CLOSED — Group Policy configured (5 attempts, 30 min) |
+| **F-004** | MEDIUM | IPFire log storage gap | ✅ CLOSED — Firewall logging verified active |
+| **F-005** | LOW | OpenSSH post-quantum crypto | ⏸️ Low priority, deferred |
+| **F-006** | LOW | Wazuh version mismatch | ✅ CLOSED — Agent downgraded, repo pinned |
 
-**All four findings closed. Clean sheet. ✅**
-
----
-
-## 🎯 Objectives
-
-- Deploy and configure Wazuh in a realistic multi-OS environment
-- Simulate adversary techniques against vulnerable targets using professional tools (Hydra)
-- Identify and document security gaps through systematic investigation
-- Deploy supplementary SIEM (Splunk) to address identified limitations
-- Remediate all findings and verify resolution with evidence
-- Build a portfolio of blue team detection scenarios demonstrating end-to-end SOC analyst workflow
+**Summary: 6 findings identified. 5 FULLY CLOSED. 1 deferred (low priority).**
 
 ---
 
-## 🛠️ Core Tools & Versions
+## 📊 Attack Scenarios Tested
 
-| Tool | Version / Notes |
-|---|---|
-| Wazuh | v4.11.2 (Ubuntu-hosted) |
-| Splunk Enterprise | 10.2.3 (Ubuntu-hosted) |
-| VMware Workstation | Pro 25H2 — host hypervisor |
-| Kali Linux | 2025.4 |
-| Hydra | v9.6 — SSH brute force tool |
-| IPFire | 2.29 x86_64 Core Update 191 |
-| SIFT Workstation | Latest |
-| SOF-ELK | Latest |
+### **Exercise 1 — Manual SSH Brute Force**
+- **Tool:** Manual `ssh wronguser@target` attempts
+- **Result:** 3 failed authentication events detected immediately
+- **Detection Time:** Within seconds
+- **Outcome:** ✅ Basic detection capability verified
+
+### **Exercise 2 — Alert Investigation**
+- **Focus:** Raw log analysis, root cause analysis, gap identification
+- **Outcome:** Systematic investigation revealed 4 security weaknesses requiring remediation
+
+### **Exercise 3 — Insider Threat Simulation (Hydra)**
+- **Tool:** Hydra SSH brute force with rockyou.txt wordlist
+- **Realism:** Professional attack tool + real-world password list
+- **Detection:** Wazuh successfully detected escalated brute force attack
+- **Key Improvement:** Kali now fully monitored (Agent 005) — attack source visible
+- **Outcome:** ✅ More realistic attack successfully detected; East-West visibility closed
+
+### **Exercise 4 — Splunk Validation**
+- **Tool:** Hydra SSH brute force (same as Exercise 3)
+- **Comparison:** Wazuh vs Splunk detection capability
+- **Critical Finding:** Splunk natively parses OpenSSH/Operational logs that Wazuh cannot decode by default
+- **Result:** Source IP 192.168.1.21 (Kali) fully visible in Splunk; Finding F-001 permanently resolved
+- **Outcome:** ✅ Splunk value proposition validated; all findings closed
 
 ---
 
-## 📌 Notes
+## 🛠️ Key Techniques & Tools
 
-- All activity is conducted in an isolated, self-hosted lab environment
-- No live or production systems are involved
-- Labs are for educational and professional development purposes only
+### Detection & Monitoring
+- **Wazuh SIEM v4.11.2** — Rule authoring, Threat Hunting module, MITRE ATT&CK mapping
+- **Splunk Enterprise 10.2.3** — Native log parsing, Search Processing Language (SPL), alert configuration
+- **Custom Wazuh Rules** — Rule IDs 100001, 100002 (SSH authentication failures)
+
+### Attack Simulation
+- **Kali Linux 2025.4** — Attack platform, Hydra SSH brute force tool
+- **rockyou.txt** — Real-world leaked password wordlist (1000+ entry trimmed version)
+
+### MITRE ATT&CK Framework
+- **Tactic:** Credential Access
+- **Technique:** T1110 — Brute Force
+- **Sub-technique:** T1110.001 — Password Guessing
 
 ---
 
-*Maintained by Davey — Desktop Consultant | CompTIA Security+ | Network+ | Server+ | A+*
+## 📈 Evolution & Lessons Learned
+
+**Initial Challenge:** Wazuh successfully detected attacks but couldn't identify attacker IP address from Windows SSH logs
+
+**Investigation:** Systematic log analysis revealed:
+- Windows OpenSSH logs to separate "Operational" event channel (not default Security channel)
+- IPFire only monitors outbound RED zone traffic (not internal GREEN zone)
+- Wazuh lacks native decoder for OpenSSH/Operational format
+
+**Decision:** Deploy Splunk as supplementary SIEM — not to replace Wazuh, but to provide missing visibility
+
+**Outcome:** 
+- Splunk natively parses OpenSSH/Operational logs with automatic source IP extraction
+- All findings identified, investigated, and resolved through evidence-driven remediation
+- Demonstrates real-world enterprise challenge: **No single SIEM provides complete visibility**
+
+---
+
+## 🔗 Related Documentation
+
+- **Incident Response Lab** — (Separate repo) Windows forensics, memory analysis, IOC investigation
+- **GitHub Profile** — https://github.com/dhorton77
+
+---
+
+## 📝 Report Details
+
+### Full Technical Reports
+Each report includes:
+- Executive summary
+- Detailed attack methodology
+- Raw log analysis with evidence
+- MITRE ATT&CK framework mapping
+- Security findings with severity ratings
+- Remediation recommendations
+- Next steps and lessons learned
+
+### Non-Technical Summaries
+Management-friendly overviews explaining:
+- What the exercise tested
+- Results in plain English
+- Why findings matter
+- Actions taken
+- Overall assessment
+
+---
+
+## 🚀 Next Lab Exercises (Planned)
+
+- **Website Defacement** — Detect and respond to application-layer attacks
+- **Ransomware Simulation** — Orange zone (DMZ) deployment with encryption detection
+- **Network-layer Detection** — Suricata IDS rules in IPFire
+
+---
+
+## 📧 Questions or Feedback?
+
+These reports are portfolio documentation demonstrating:
+- SOC analyst workflow and analytical thinking
+- Evidence-driven decision making
+- Professional documentation standards
+- Continuous security improvement mindset
+
+---
+
+**Analyst:** David Boyd Horton  
+**Last Updated:** 10 May 2026  
+**Classification:** Portfolio — Home Lab Exercise  
+**License:** Portfolio/Educational Use
+
+---
+
+*This repository reflects hands-on security engineering practice and serves as a professional portfolio demonstration of detection engineering, SIEM deployment, and blue team analysis capabilities.*
