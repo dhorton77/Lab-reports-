@@ -64,7 +64,7 @@ This lab programme showcases:
 | Component | Details | IP Address |
 |-----------|---------|-----------|
 | **SIEM — Wazuh** | Ubuntu Server 24.04 LTS + Wazuh v4.11.2 | 192.168.1.15 |
-| **SIEM — Splunk** | Ubuntu Server 24.04 LTS + Splunk Enterprise 10.2.3 | TBD |
+| **SIEM — Splunk** | Ubuntu Server 24.04 LTS + Splunk Enterprise 10.2.3 | 192.168.1.20 |
 | **Target Endpoint** | Windows 11 Pro (Wazuh Agent 001) | 192.168.1.8 |
 | **Attack Platform** | Kali Linux 2025.4 (Wazuh Agent 005) | 192.168.1.21 |
 | **Firewall / IDS** | IPFire 2.29 x86_64 (Core Update 191) | 192.168.1.1 |
