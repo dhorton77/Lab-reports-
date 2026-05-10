@@ -1,0 +1,2 @@
+config/wazuh-rules.xml
+config/splunk-queries.spl
