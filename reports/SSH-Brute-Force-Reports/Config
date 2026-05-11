@@ -1,5 +1,3 @@
-config/wazuh-rules.xml
-config/splunk-queries.spl
 # Splunk SPL Queries — SSH Brute Force Detection & Investigation
 
 **Lab Exercise:** SSH Brute Force Attack Simulation & Detection  
