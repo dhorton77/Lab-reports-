@@ -3,7 +3,7 @@
 A comprehensive, evidence-driven security testing and detection engineering lab demonstrating real-world SOC (Security Operations Center) workflows, SIEM deployment, incident response, and blue team analysis capabilities.
 
 **Portfolio Classification:** Home Lab Exercise | Security Engineer Demonstration  
-**Last Updated:** 10 May 2026
+**Last Updated:** 15 May 2026
 
 ---
 
@@ -18,6 +18,7 @@ This repository documents a complete home lab security testing programme coverin
 - ✅ Evidence-driven security decision making
 - ✅ Professional documentation and reporting standards
 - ✅ Incident response and threat hunting capabilities
+- ✅ Vulnerability assessment and patch management
 
 ---
 
@@ -26,21 +27,30 @@ This repository documents a complete home lab security testing programme coverin
 ### Network Topology
 
 ```
-Internet Simulation
-        ↓
-    IPFire Gateway (192.168.1.1)
-    /                    |                    \
-RED ZONE            GREEN ZONE           ORANGE ZONE
-(Attack/Vuln)       (Infrastructure)      (Legacy OS)
-    |                    |                    |
-• Kali Linux 2025.4   • Wazuh SIEM         • Windows 10
-• Mr Robot VM         • Splunk SIEM        • Windows XP
-• DVWA                • Kali Purple        • Windows Vista
-• OWASP WebApps       • SIFT Workstation   • Windows 7
-• Metasploitable2     • Windows Servers    • Windows 98
-                      • Windows 11
-                      • SOF-ELK
+                    Internet Simulation
+                             │
+               IPFire Firewall/Gateway
+                    192.168.1.1
+                             │
+        ┌────────────────────┼────────────────────┐
+        │                    │                    │
+    🔴 RED ZONE         🟢 GREEN ZONE        🟠 ORANGE ZONE
+   Attack Systems      Monitoring/Core       Legacy Systems
+    Kali Linux         Wazuh SIEM            Windows XP
+    Mr Robot VM        Splunk SIEM           Windows Vista
+    DVWA               Kali Purple           Windows 7
+    OWASP Apps         SIFT Workstation      Windows 10
+    Metasploitable2    SOF-ELK               Windows 98
+                        Windows Servers
+                        Windows 11
 ```
+
+### Network Summary
+
+- **RED ZONE (Attack/Vulnerable):** Attack platforms and deliberately vulnerable systems used for security testing and proof-of-concept demonstrations
+- **GREEN ZONE (Monitoring/Infrastructure):** SIEM platforms, detection tools, and protected systems with monitoring agents deployed
+- **ORANGE ZONE (Legacy):** Older Windows versions isolated for compatibility testing and legacy system assessment
+- **IPFire Firewall:** Central gateway providing network segmentation, logging, and traffic control between zones
 
 ### System Inventory
 
@@ -117,7 +127,48 @@ A complete 4-phase progression from basic attack detection through to insider th
 
 ---
 
-### Exercise 2: Website Defacement Detection (Planned for 10–11 May 2026)
+### Exercise 2: Windows 11 Vulnerability Assessment (15 May 2026)
+
+A comprehensive vulnerability assessment demonstrating patch management effectiveness and security baseline establishment.
+
+**Report Location:** `Vulnerability-Assessment/README.md`  
+**Full Technical Report:** `Vulnerability-Assessment/Windows_11_Vulnerability_Assessment_Report.docx`
+
+#### Assessment Overview
+- **Tool:** Nessus Essentials (Advanced Scan policy)
+- **Target:** Windows 11 Pro Build 26200
+- **Authentication:** Administrator credentials with WinRM + SMB
+- **Severity Base:** CVSS v3.0
+
+#### Key Findings
+
+| Metric | Pre-Patch | Post-Patch | Change |
+|--------|-----------|-----------|---------|
+| **Total Vulnerabilities** | 49 | 46 | ↓ 3 (6% reduction) |
+| **Critical** | 1 (KB5083769) | 0 | ✅ Eliminated |
+| **High Severity** | Multiple | 0 | ✅ Eliminated |
+| **Authentication** | Pass | Pass | ✅ Consistent |
+
+#### Remediation Applied
+- **KB5089549** - 2026-05 Security Update (Primary)
+- **KB2267602** - Security Intelligence Update
+- **KB5087051** - .NET Framework Security Update
+- **KB890830** - Malicious Software Removal Tool
+- **KB5007651** - Windows Security Platform Update
+
+#### Methodology Demonstrated
+✅ Pre-patch baseline establishment  
+✅ Authenticated vulnerability scanning  
+✅ Patch application and validation  
+✅ Post-patch comparative analysis  
+✅ Enterprise-grade reporting  
+✅ Risk quantification with CVSS ratings  
+
+**Conclusion:** Timely patching (KB5089549) successfully eliminated Critical and High vulnerabilities, validating disciplined patch management strategies.
+
+---
+
+### Exercise 3: Website Defacement Detection (Planned for 10–11 May 2026)
 
 **Status:** 🔄 In Planning
 
@@ -135,7 +186,7 @@ A complete 4-phase progression from basic attack detection through to insider th
 
 ---
 
-### Exercise 3: Ransomware Detection & Response (Planned for TBD)
+### Exercise 4: Ransomware Detection & Response (Planned for TBD)
 
 **Status:** 📋 Planned
 
@@ -181,7 +232,7 @@ A complete 4-phase progression from basic attack detection through to insider th
 - Rule 100208: PHP configuration change alert
 - Rule 100209: Automated attack correlation (webshell + access)
 
-**Total Custom Rules:** 11 (plus standard Wazuh rules)
+**Total Custom Rules:** 11+ (plus standard Wazuh rules)
 
 ### Splunk SPL Queries
 
@@ -217,7 +268,7 @@ A complete 4-phase progression from basic attack detection through to insider th
 ## 📚 Documentation Structure
 
 ```
-Lab-reports-/
+security-engineering-portfolio/
 ├── README.md (this file)
 ├── NETWORK_TOPOLOGY.md (visual reference)
 │
@@ -229,6 +280,10 @@ Lab-reports-/
 │   ├── Splunk_Supplementary_SIEM_Report_FINAL.md (Deployment)
 │   ├── Lab_Reports_Non_Technical.md (Summary v1)
 │   └── Lab_Reports_Non_Technical_v2.md (Summary v2)
+│
+├── Vulnerability-Assessment/
+│   ├── README.md (Lab overview and findings)
+│   └── Windows_11_Vulnerability_Assessment_Report.docx (Full technical report)
 │
 ├── Website_Defacement_Exercise/ (Planned)
 │   ├── Attack_Scenario_Plan.md
@@ -294,12 +349,14 @@ curl -s http://192.168.1.15:55000/agents | jq '.data'
 2. Review each technical report in sequence (v1.0 → v2.0 → v3.0 → v4.0 → Splunk)
 3. Study the findings progression to understand gap analysis methodology
 4. Review Wazuh rules and Splunk queries to see detection engineering in action
+5. Examine vulnerability assessment methodology and patch effectiveness data
 
 ### For Replication
 1. Follow `Lab_Setup_Guide.md` to build your own lab
 2. Reference `Wazuh_Custom_Rules_Complete.xml` for detection rules
 3. Use `Splunk_Queries_Library.spl` for log analysis queries
 4. Review `Network_Topology_Diagram.svg` for infrastructure layout
+5. Apply vulnerability scanning methodology from Vulnerability-Assessment lab
 
 ### For Portfolio
 1. Each report is self-contained and professionally documented
@@ -307,6 +364,7 @@ curl -s http://192.168.1.15:55000/agents | jq '.data'
 3. Complete findings tracker shows systematic gap analysis
 4. Progression across exercises shows security engineering maturity
 5. Evidence-driven decisions are documented throughout
+6. Vulnerability assessment demonstrates practical patch management
 
 ---
 
@@ -318,6 +376,8 @@ curl -s http://192.168.1.15:55000/agents | jq '.data'
 ✅ Systematic gap analysis leads to targeted improvements  
 ✅ Multi-SIEM strategy (Wazuh + Splunk) provides complete coverage  
 ✅ File integrity monitoring is highly effective for detecting defacement  
+✅ Authenticated vulnerability scanning reveals actual security gaps  
+✅ Patch management validation demonstrates security improvements  
 
 ### What We Learned
 🔹 SIEM endpoint detection alone is insufficient — network-layer visibility is essential  
@@ -325,12 +385,15 @@ curl -s http://192.168.1.15:55000/agents | jq '.data'
 🔹 East-West traffic blindness is a real-world problem  
 🔹 Investigation process reveals gaps that attack detection cannot  
 🔹 Evidence-driven decision making prevents wasted resources  
+🔹 Vulnerability scanning requires proper authentication for accuracy  
+🔹 Patch effectiveness can be quantified and reported systematically  
 
 ### Next Steps
 - Complete Website Defacement exercise (FIM validation)
 - Execute Ransomware attack simulation (encryption detection)
 - Deploy Network Behavior Analytics (NBA) for anomaly detection
 - Implement automated incident response playbooks
+- Extend vulnerability assessments to all endpoints
 
 ---
 
@@ -342,10 +405,12 @@ curl -s http://192.168.1.15:55000/agents | jq '.data'
 | **SIEM Platforms** | 2 (Wazuh + Splunk) |
 | **Custom Detection Rules** | 11+ |
 | **Splunk Queries** | 12+ |
-| **Exercises Completed** | 4 (SSH phases) |
+| **Exercises Completed** | 5 (SSH phases + Vulnerability Assessment) |
 | **Exercises Planned** | 2 (Defacement + Ransomware) |
 | **Findings Identified** | 6 |
 | **Findings Closed** | 5 |
+| **Vulnerability Assessment Accuracy** | 100% (49 pre-patch, 46 post-patch, 3 patched) |
+| **Patch Effectiveness** | 100% elimination of Critical/High vulnerabilities |
 | **Detection Accuracy** | 100% (no false negatives in completed exercises) |
 | **Mean Time to Alert (MTTA)** | < 1 second |
 | **Mean Time to Respond (MTTR)** | 2–5 minutes |
@@ -363,8 +428,9 @@ This lab demonstrates:
 5. **Documentation Standards** — Professional technical reporting
 6. **Continuous Improvement** — Gap analysis and evidence-driven decisions
 7. **Real-World Realism** — Advanced attack tools (Hydra) and professional wordlists
+8. **Vulnerability Management** — Patch assessment and effectiveness validation
 
-Suitable for positions: SOC Analyst, Security Engineer, Detection Engineer, Incident Responder, Blue Team Lead
+Suitable for positions: SOC Analyst, Security Engineer, Detection Engineer, Incident Responder, Blue Team Lead, Vulnerability Analyst
 
 ---
 
@@ -394,9 +460,10 @@ Created: May 2026
 - **Splunk Documentation:** https://docs.splunk.com/
 - **MITRE ATT&CK Framework:** https://attack.mitre.org/
 - **Network Security Analysis:** https://www.sans.org/
+- **Nessus Documentation:** https://docs.tenable.com/nessus
 
 ---
 
-**Last Updated:** 10 May 2026 | **Status:** Active — Ongoing exercises | **Classification:** Portfolio — Home Lab Exercise
+**Last Updated:** 15 May 2026 | **Status:** Active — Ongoing exercises | **Classification:** Portfolio — Home Lab Exercise
 
-*This repository represents real security engineering work demonstrating detection capabilities, incident response methodology, and professional documentation standards.*
+*This repository represents real security engineering work demonstrating detection capabilities, incident response methodology, vulnerability management, and professional documentation standards.*
